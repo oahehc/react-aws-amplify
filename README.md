@@ -66,18 +66,84 @@ Auth.confirmSignUp({
 });
 ```
 
-## 5. create AppSync GraphQL API
+## 5. create AppSync for GraphQL API
 
 ```shell
 amplify add api
+(select GrahpQL)
 amplify push
 ```
 
----
+```javascript
+import { API, graphqlOperation } from 'aws-amplify
+const ListTodos = `
+  query {
+    listTodos {
+      items {
+        id name description completed
+      }
+    }
+  }
+`
+...
+const todoData = await API.graphql(graphqlOperation(ListTodos))
+this.setState({ todos: todoData.data.listTodos.items })
+```
+
+## 6. create AWS Lambda for Serverless REST API
+
+#### create lambda function
+
+```shell
+amplify add api
+(select REST)
+amplify push
+```
+
+#### edit API
 
 ```javascript
+// @amplify/backend/function/[functionName]/src
+update base on API logic...
+
+// run amplify push again after finish edit
 ```
+
+#### call API on React
+
+```javascript
+import { API } from 'aws-amplify'
+...
+data = await API.get('peopleapi', '/people')
+this.setState({ people: data.people })
+```
+
+## 7. store data to S3
+
+```shell
+amplify add storage
+(select Content)
+amplify push
+```
+
+```javascript
+import { Storage } from 'aws-amplify'
+...
+// upload file
+Storage.put(filename, file)
+  .then(() => ...)
+  .catch(e => ...)
+// get file
+Storage.get(filename)
+  .then(data => this.setState({ fileUrl: data }))
+  .catch(e => ...)
+```
+
+## 8. deploy React Application
 
 ```shell
 
+```
+
+```javascript
 ```
