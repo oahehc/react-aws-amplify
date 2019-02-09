@@ -1,9 +1,11 @@
-Reference: 
-https://egghead.io/courses/building-serverless-web-applications-with-react-aws-amplify 
-https://github.com/aws-amplify 
+Reference:
+https://egghead.io/courses/building-serverless-web-applications-with-react-aws-amplify
+https://github.com/aws-amplify
+
 ---
 
 ## 1. install aws amplify cli
+
 ```shell
 npm install -g @aws-amplify/cli
 # config: create IAM user and config to amplify
@@ -11,6 +13,7 @@ amplify configure
 ```
 
 ## 2. create react app
+
 ```shell
 npx create-react-app react-aws-amplify
 amplify init
@@ -18,12 +21,16 @@ yarn add aws-amplify aws-amplify-react
 ```
 
 ## 3. authorization flow
+
 #### create cognito
+
 ```shell
 amplify add auth
 amplify push
 ```
+
 #### apply cognito sign-in / sign-out with default style
+
 ```javascript
 // @index.js
 import Amplify from 'aws-amplify'
@@ -35,12 +42,42 @@ import { withAuthenticator } from 'aws-amplify-react'
 ...
 export default withAuthenticator(App, { includeGreetings: true });
 ```
+
 #### check service create by amplify
+
 ```shell
 amplify status
 ```
 
-## 4. custom sign-in / sign-out
+## 4. custom sign-up process
+
+```javascript
+import { Auth } from 'aws-amplify';
+...
+Auth.signUp({
+  username,
+  password,
+  attributes: { email, phone_number },
+});
+...
+Auth.confirmSignUp({
+  username,
+  authenticationCode,
+});
+```
+
+## 5. create AppSync GraphQL API
 
 ```shell
+amplify add api
+amplify push
+```
+
+---
+
+```javascript
+```
+
+```shell
+
 ```
