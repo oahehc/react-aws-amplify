@@ -139,11 +139,9 @@ Storage.get(filename)
   .catch(e => ...)
 ```
 
-## 8. deploy React Application
+## 8. deploy React Application to S3
 
 ```shell
-
-```
-
-```javascript
+amplify add hosting
+amplify publish
 ```
